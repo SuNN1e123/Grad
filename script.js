@@ -3,22 +3,18 @@ const hatCtx = hatCanvas.getContext('2d');
 const drawCanvas = document.getElementById('drawLayer');
 const drawCtx = drawCanvas.getContext('2d');
 
-const brushBtn = document.getElementById('brushBtn');
-const eraserBtn = document.getElementById('eraserBtn');
 const colorPicker = document.getElementById('colorPicker');
 const widthPicker = document.getElementById('widthPicker');
 const saveBtn = document.getElementById('saveBtn');
 
 let drawing = false;
 let lastX = 0, lastY = 0;
-let eraser = false;
-
 let lineWidth = parseInt(widthPicker.value);
 let lineColor = colorPicker.value;
 
 // -----------畫帽子底圖到 hatLayer-----------
 const hatImg = new Image();
-hatImg.src = 'hat.png';  // 檔案跟html放同資料夾
+hatImg.src = 'hat.png';
 hatImg.onload = function(){
     hatCtx.clearRect(0,0,hatCanvas.width,hatCanvas.height);
     hatCtx.drawImage(hatImg,0,0,hatCanvas.width,hatCanvas.height);
@@ -45,20 +41,18 @@ function startDraw(e){
 function moveDraw(e){
     if(!drawing) return;
     const {x, y} = getXY(e);
+
     drawCtx.lineCap = 'round';
     drawCtx.lineJoin = 'round';
     drawCtx.lineWidth = lineWidth;
-    if(eraser){
-        drawCtx.globalCompositeOperation = 'destination-out';
-        drawCtx.strokeStyle = 'rgba(0,0,0,1)';
-    }else{
-        drawCtx.globalCompositeOperation = 'source-over';
-        drawCtx.strokeStyle = lineColor;
-    }
+    drawCtx.globalCompositeOperation = 'source-over';
+    drawCtx.strokeStyle = lineColor;
+
     drawCtx.beginPath();
     drawCtx.moveTo(lastX, lastY);
     drawCtx.lineTo(x, y);
     drawCtx.stroke();
+
     lastX = x; lastY = y;
 }
 
@@ -66,7 +60,7 @@ function endDraw(){
     drawing = false;
 }
 
-// 事件綁定
+// 事件綁定（只畫畫層）
 drawCanvas.addEventListener('mousedown', startDraw);
 drawCanvas.addEventListener('mousemove', moveDraw);
 drawCanvas.addEventListener('mouseup', endDraw);
@@ -76,13 +70,10 @@ drawCanvas.addEventListener('touchstart', startDraw, {passive:false});
 drawCanvas.addEventListener('touchmove', moveDraw, {passive:false});
 drawCanvas.addEventListener('touchend', endDraw);
 
-// 按鈕
-brushBtn.onclick = ()=>{eraser=false;}
-eraserBtn.onclick = ()=>{eraser=true;}
 colorPicker.oninput = ()=>{lineColor = colorPicker.value;}
 widthPicker.oninput = ()=>{lineWidth = parseInt(widthPicker.value);}
 
-// 下載：合併兩層
+// 下載：合併兩層 canvas
 saveBtn.onclick = ()=>{
     const merged = document.createElement('canvas');
     merged.width = hatCanvas.width;
