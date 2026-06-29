@@ -20,7 +20,11 @@
         <button id="saveBtn">下載帽子圖</button>
     </div>
     <br>
-    <canvas id="drawArea" width="400" height="400"></canvas>
+    <!-- 兩層 canvas：底圖+畫圖層 -->
+    <div style="position: relative; display: inline-block;">
+        <canvas id="hatLayer" width="400" height="400" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+        <canvas id="drawLayer" width="400" height="400" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+    </div>
     <br>
     <small>手機/電腦都可用！</small>
     <script src="script.js"></script>
