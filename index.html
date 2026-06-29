@@ -4,29 +4,28 @@
     <meta charset="UTF-8">
     <title>畢業帽畫圖 App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body { text-align: center; font-family: sans-serif; }
+        #canvasWrap { position: relative; display: inline-block; }
+        #hatLayer, #drawLayer { position: absolute; left: 0; top: 0; }
+        #hatLayer { z-index: 0; }
+        #drawLayer { z-index: 1; }
+        canvas { border: 2px solid #333; }
+    </style>
 </head>
 <body>
     <h2>畢業帽設計 App</h2>
-    <div id="controls">
-        <input type="color" id="colorPicker" value="#ff0000">
-        <button id="brushBtn">畫筆</button>
-        <button id="eraserBtn">橡皮擦</button>
-        <button id="undoBtn">Undo</button>
-        <label>
-            粗細
-            <input type="number" id="widthPicker" min="1" max="50" value="5" style="width: 50px">
-        </label>
-        <button id="saveBtn">下載帽子圖</button>
+    <button id="brushBtn">畫筆</button>
+    <button id="eraserBtn">橡皮擦</button>
+    <input type="color" id="colorPicker" value="#ff0000">
+    <input type="number" id="widthPicker" min="1" max="50" value="10">
+    <button id="saveBtn">下載</button><br>
+    <div id="canvasWrap">
+        <canvas id="hatLayer" width="400" height="400"></canvas>
+        <canvas id="drawLayer" width="400" height="400"></canvas>
     </div>
     <br>
-    <!-- 兩層 canvas：底圖+畫圖層 -->
-    <div style="position: relative; display: inline-block;">
-        <canvas id="hatLayer" width="400" height="400" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
-        <canvas id="drawLayer" width="400" height="400" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
-    </div>
-    <br>
-    <small>手機/電腦都可用！</small>
+    <small>橡皮擦只擦畫上去的內容，不會擦掉帽子</small>
     <script src="script.js"></script>
 </body>
 </html>
