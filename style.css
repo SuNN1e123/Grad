@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#controls {
+    margin-bottom: 8px;
+}
+canvas {
+    border: 2px solid #333;
+    touch-action: none;   /* For preventing iOS gesture interference */
+}
+button {
+    font-size: 16px;
+}

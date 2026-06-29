@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>畢業帽畫圖 App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>畢業帽設計 App</h2>
+    <div id="controls">
+        <input type="color" id="colorPicker" value="#ff0000">
+        <button id="brushBtn">畫筆</button>
+        <button id="eraserBtn">橡皮擦</button>
+        <button id="undoBtn">Undo</button>
+        <label>
+            粗細
+            <input type="number" id="widthPicker" min="1" max="50" value="5" style="width: 50px">
+        </label>
+        <button id="saveBtn">下載帽子圖</button>
+    </div>
+    <br>
+    <canvas id="drawArea" width="400" height="400"></canvas>
+    <br>
+    <small>手機/電腦都可用！</small>
+    <script src="script.js"></script>
+</body>
+</html>
